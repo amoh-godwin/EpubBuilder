@@ -1,5 +1,4 @@
 import os
-import pytest
 
 from Builder import Builder
 
