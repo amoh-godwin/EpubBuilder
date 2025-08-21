@@ -2,7 +2,6 @@ import os
 import pytest
 
 from Builder import Builder
-import functions
 
 
 def test_make_container_folder():
