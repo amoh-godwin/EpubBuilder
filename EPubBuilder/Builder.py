@@ -1,6 +1,6 @@
 import os
 
-from functions import make_mimetype_file, make_container_xml
+from functions import make_mimetype_file, make_container_xml, make_opf_file
 
 
 class Builder:
@@ -9,6 +9,10 @@ class Builder:
         self.store_folder = store_folder
         self.epub_container: str = ""
         self.meta_inf_folder: str = ""
+        self.opf_container: str = "EPUB"
+
+        # Book details
+        self.title: str = ""
 
     def make_container_folder(self, name: str = ""):
         """
@@ -29,3 +33,8 @@ class Builder:
         os.makedirs(meta_inf_folder, exist_ok=True)
         self.meta_inf_folder = meta_inf_folder
         make_container_xml(meta_inf_folder)
+
+    def make_opf_file(self):
+        opf_container = os.path.join(self.epub_container, self.opf_container)
+        os.makedirs(opf_container, exist_ok=True)
+        make_opf_file(opf_container, self.title)
