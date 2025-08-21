@@ -1,6 +1,6 @@
 import os
 
-from .functions import make_mimetype_file
+from functions import make_mimetype_file
 
 
 class Builder:
