@@ -13,7 +13,7 @@ class Builder:
         self.opf_file: str = ""
 
         # Book details
-        self.title: str = ""
+        self.title: str = "BookTitle"
 
     def make_container_folder(self, name: str = ""):
         """
