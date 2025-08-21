@@ -10,6 +10,7 @@ class Builder:
         self.epub_container: str = ""
         self.meta_inf_folder: str = ""
         self.opf_container: str = "EPUB"
+        self.opf_file: str = ""
 
         # Book details
         self.title: str = ""
@@ -37,4 +38,4 @@ class Builder:
     def make_opf_file(self):
         opf_container = os.path.join(self.epub_container, self.opf_container)
         os.makedirs(opf_container, exist_ok=True)
-        make_opf_file(opf_container, self.title)
+        self.opf_file = make_opf_file(opf_container, self.title)
