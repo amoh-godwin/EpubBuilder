@@ -1,6 +1,6 @@
 import os
 
-from functions import make_mimetype_file
+from functions import make_mimetype_file, make_container_xml
 
 
 class Builder:
@@ -28,3 +28,4 @@ class Builder:
         meta_inf_folder = os.path.join(container_name, "META-INF")
         os.makedirs(meta_inf_folder, exist_ok=True)
         self.meta_inf_folder = meta_inf_folder
+        make_container_xml(meta_inf_folder)
