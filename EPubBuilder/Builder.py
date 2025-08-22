@@ -9,8 +9,8 @@ class Builder:
         self.store_folder = store_folder
         self.epub_container: str = ""
         self.meta_inf_folder: str = ""
-        self.opf_container: str = "EPUB"
-        self.opf_file: str = ""
+        self.opf_name: str = "EPUB"
+        self.opf_container = ""
 
         # Book details
         self.title: str = "BookTitle"
@@ -35,10 +35,10 @@ class Builder:
         make_container_xml(meta_inf_folder)
 
     def make_opf_file(self):
-        opf_container = os.path.join(self.epub_container, self.opf_container)
+        opf_container = os.path.join(self.epub_container, self.opf_name)
         os.makedirs(opf_container, exist_ok=True)
-        self.opf_file = make_opf_file(opf_container, self.title)
+        make_opf_file(opf_container, self.title)
+        self.opf_container = opf_container
 
     def create_template_html(self):
-        opf_container = os.path.join(self.epub_container, self.opf_container)
-        copy_template_html(opf_container)
+        copy_template_html(self.opf_container)
