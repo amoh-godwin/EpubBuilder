@@ -42,3 +42,11 @@ class Builder:
 
     def create_template_html(self):
         functions.copy_template_html(self.opf_container)
+
+    def make_epub(self, source_folder: str, store_path: str) -> str:
+        store_folder, ext = os.path.splitext(store_path)
+        store_folder += ".zip"
+        zip_folder = functions.make_zip(source_folder, store_folder)
+        epub_file = zip_folder.replace('.zip', '.epub')
+        os.rename(zip_folder, epub_file)
+        return epub_file
