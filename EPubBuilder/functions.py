@@ -59,9 +59,10 @@ def copy_template_html(folder: str) -> bool:
         temp_var = {'book.html': book_file, 'nav.html': nav_file}
         for x in enumerate(temp_var):
 
-            with open(os.path.join(folder, x[0]), 'w') as write_f:
-                with open(x[1], 'r') as read_file:
-                    write_f.write(read_file.read())
+            with open(temp_var[x[1]], 'r') as read_file:
+                read_contents = read_file.read()
+            with open(os.path.join(folder, x[1]), 'w') as write_f:
+                write_f.write(read_contents)
         return True
     except Exception as e:
         print(e)
