@@ -1,6 +1,6 @@
 import os
 
-from functions import *
+import functions
 
 
 class Builder:
@@ -22,7 +22,7 @@ class Builder:
         container_name = os.path.join(self.store_folder, name)
         os.makedirs(container_name, exist_ok=True)
 
-        make_mimetype_file(container_name)
+        functions.make_mimetype_file(container_name)
         self.epub_container = container_name
 
     def make_meta_inf_folder(self, container_name: str):
@@ -32,13 +32,13 @@ class Builder:
         meta_inf_folder = os.path.join(container_name, "META-INF")
         os.makedirs(meta_inf_folder, exist_ok=True)
         self.meta_inf_folder = meta_inf_folder
-        make_container_xml(meta_inf_folder)
+        functions.make_container_xml(meta_inf_folder)
 
     def make_opf_file(self):
         opf_container = os.path.join(self.epub_container, self.opf_name)
         os.makedirs(opf_container, exist_ok=True)
-        make_opf_file(opf_container, self.title)
+        functions.make_opf_file(opf_container, self.title)
         self.opf_container = opf_container
 
     def create_template_html(self):
-        copy_template_html(self.opf_container)
+        functions.copy_template_html(self.opf_container)
