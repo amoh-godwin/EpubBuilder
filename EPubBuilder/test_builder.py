@@ -30,3 +30,8 @@ def test_create_template_html():
     book_path = os.path.join(opf_folder, "book.html")
     nav_path = os.path.join(opf_folder, "nav.html")
     assert os.path.exists(book_path) and os.path.exists(nav_path)
+
+
+def test_make_epub():
+    epub = builder.make_epub(builder.epub_container, builder.store_folder)
+    assert os.path.exists(epub)
