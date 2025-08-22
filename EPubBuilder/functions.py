@@ -49,3 +49,20 @@ def make_opf_file(folder: str, title: str) -> str:
         f.write(opf_content.strip())
 
     return opf_file
+
+
+def copy_template_html(folder: str) -> bool:
+    book_file = os.path.join(TEMPLATE_FOLDER, 'book.html')
+    nav_file = os.path.join(TEMPLATE_FOLDER, "nav.html")
+
+    try:
+        temp_var = {'book.html': book_file, 'nav.html': nav_file}
+        for x in enumerate(temp_var):
+
+            with open(os.path.join(folder, x[0]), 'w') as write_f:
+                with open(x[1], 'r') as read_file:
+                    write_f.write(read_file.read())
+        return True
+    except Exception as e:
+        print(e)
+        return False
