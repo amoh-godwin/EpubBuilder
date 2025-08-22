@@ -4,6 +4,24 @@ import os
 TEMPLATE_FOLDER = "./templates"
 
 
+def copy_template_html(folder: str) -> bool:
+    book_file = os.path.join(TEMPLATE_FOLDER, 'book.html')
+    nav_file = os.path.join(TEMPLATE_FOLDER, "nav.html")
+
+    try:
+        temp_var = {'book.html': book_file, 'nav.html': nav_file}
+        for x in enumerate(temp_var):
+
+            with open(temp_var[x[1]], 'r') as read_file:
+                read_contents = read_file.read()
+            with open(os.path.join(folder, x[1]), 'w') as write_f:
+                write_f.write(read_contents)
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+
 def make_mimetype_file(folder: str) -> str:
     """
     Creates a mimetype file in the specified folder.
@@ -49,21 +67,3 @@ def make_opf_file(folder: str, title: str) -> str:
         f.write(opf_content.strip())
 
     return opf_file
-
-
-def copy_template_html(folder: str) -> bool:
-    book_file = os.path.join(TEMPLATE_FOLDER, 'book.html')
-    nav_file = os.path.join(TEMPLATE_FOLDER, "nav.html")
-
-    try:
-        temp_var = {'book.html': book_file, 'nav.html': nav_file}
-        for x in enumerate(temp_var):
-
-            with open(temp_var[x[1]], 'r') as read_file:
-                read_contents = read_file.read()
-            with open(os.path.join(folder, x[1]), 'w') as write_f:
-                write_f.write(read_contents)
-        return True
-    except Exception as e:
-        print(e)
-        return False
