@@ -32,7 +32,8 @@ def make_container_xml(folder: str) -> bool:
 
         return True
     except Exception as e:
-        return e
+        print(e)
+        return False
 
 
 def make_opf_file(folder: str, title: str) -> str:
