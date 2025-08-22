@@ -20,20 +20,16 @@ def make_container_xml(folder: str) -> bool:
     Creates a container.xml file in the specified folder.
     This file is part of the EPUB structure.
     """
-    xml_content = """
-    <?xml version="1.0"?>\n
-    <container\n
-        version="1.0"\n
-        xmlns="urn:oasis:names:tc:opendocument:xmlns:container">\n
-    <rootfiles>\n
-        <rootfile />\n
-    </rootfiles>\n
-    </container>\n
-    """
+
     try:
+        xml_template_file = os.path.join(TEMPLATE_FOLDER, 'container.xml')
+        with open(xml_template_file, 'r') as xml_file:
+            xml_content = xml_file.read()
+
         container_file_path = os.path.join(folder, "container.xml")
         with open(container_file_path, "w") as container_file:
             container_file.write(xml_content.strip())
+
         return True
     except Exception as e:
         return e
