@@ -1,4 +1,6 @@
 import os
+import zipfile
+import pathlib
 
 
 TEMPLATE_FOLDER = "./templates"
@@ -67,3 +69,17 @@ def make_opf_file(folder: str, title: str) -> str:
         f.write(opf_content.strip())
 
     return opf_file
+
+
+def make_zip(source_folder: str, store_path: str):
+    directory = pathlib.Path(source_folder)
+
+    try:
+        with zipfile.ZipFile(store_path, 'w') as zip_file:
+            for filename in directory.rglob("*"):
+                zip_file.write(
+                    filename, arcname=filename.relative_to(directory))
+        return store_path
+    except Exception as e:
+        print(e)
+        return False
