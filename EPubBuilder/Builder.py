@@ -1,6 +1,6 @@
 import os
 
-from functions import make_mimetype_file, make_container_xml, make_opf_file
+from functions import *
 
 
 class Builder:
@@ -18,7 +18,6 @@ class Builder:
     def make_container_folder(self, name: str = ""):
         """
         Creates a container folder for the EPUB structure.
-
         """
         container_name = os.path.join(self.store_folder, name)
         os.makedirs(container_name, exist_ok=True)
@@ -39,3 +38,7 @@ class Builder:
         opf_container = os.path.join(self.epub_container, self.opf_container)
         os.makedirs(opf_container, exist_ok=True)
         self.opf_file = make_opf_file(opf_container, self.title)
+
+    def create_template_html(self):
+        opf_container = os.path.join(self.epub_container, self.opf_container)
+        copy_template_html(opf_container)
