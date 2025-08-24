@@ -73,6 +73,7 @@ def make_opf_file(folder: str, title: str) -> str:
 
 def make_zip(source_folder: str, store_path: str):
     directory = pathlib.Path(source_folder)
+    returned_name = ""
 
     try:
         with ZipFile(
@@ -80,7 +81,8 @@ def make_zip(source_folder: str, store_path: str):
             for filename in directory.rglob("*"):
                 zip_file.write(
                     filename, arcname=filename.relative_to(directory))
-        return store_path
+            returned_name = zip_file.filename
+        return returned_name
     except Exception as e:
         print(e)
         return False
