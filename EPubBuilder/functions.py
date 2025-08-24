@@ -1,5 +1,5 @@
 import os
-import zipfile
+from zipfile import ZipFile, ZIP_DEFLATED
 import pathlib
 
 
@@ -75,7 +75,8 @@ def make_zip(source_folder: str, store_path: str):
     directory = pathlib.Path(source_folder)
 
     try:
-        with zipfile.ZipFile(store_path, 'w') as zip_file:
+        with ZipFile(
+            store_path, 'w', ZIP_DEFLATED, compresslevel=8) as zip_file:
             for filename in directory.rglob("*"):
                 zip_file.write(
                     filename, arcname=filename.relative_to(directory))
