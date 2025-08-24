@@ -48,5 +48,8 @@ class Builder:
         store_folder += ".zip"
         zip_folder = functions.make_zip(source_folder, store_folder)
         epub_file = zip_folder.replace('.zip', '.epub')
-        os.rename(zip_folder, epub_file)
+        try:
+            os.rename(zip_folder, epub_file)
+        except FileExistsError as e:
+            print(e)
         return epub_file
